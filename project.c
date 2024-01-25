@@ -37,15 +37,3 @@ void DisplayTask(struct Task task) {
     }
     
 }
-
-int main() {
-    struct Task task;
-    int size;
-    printf("Enter details for the task:\n");
-    CreateTask(Task,&size);
-    DisplayTask(Task,&size);
-    // Printing the created task for demonstration purposes
-
-
-    return 0;
-}
