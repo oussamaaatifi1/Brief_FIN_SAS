@@ -4,18 +4,18 @@
 struct Task
 {
     char description[1];
-    struct Date
-    {
+    int priority;
+};
+struct Date
+{
         int year;
         int month;
         int day;
-    };
-    int priority;
 };
 
 
 void CreateTask(struct Task task){
-    int *size;
+    int size;
     int i;
 
     for (i = 0; i <= *size; i++){
@@ -28,10 +28,11 @@ void CreateTask(struct Task task){
     }
 }
 void DisplayTask(struct Task task) {
-    int *size;
+    int size;
+    int i;
     printf("\nTask Details:\n");
     for(i = 0;i<= *size;i++){
-        printf("Description: %s\n", task.description);
+    printf("Description: %s\n", task.description);
     printf("Due Date: %02d-%02d-%04d\n", task.day, task.month, task.year);
     printf("Priority: %d\n", task.priority);
     }
