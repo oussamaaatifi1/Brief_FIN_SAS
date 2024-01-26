@@ -1,40 +1,75 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-struct Task
-{
-    char description[1];
+// Structure to represent a task
+struct Task {
+    char description[100];
+    char deadline[20];
     int priority;
 };
-struct Date
-{
-        int year;
-        int month;
-        int day;
-};
 
+// Function to add a new task to the list
+void addTask(struct Task *taskList, int *taskCount) {
+    printf("Enter task description: ");
+    scanf(" %[^\n]", taskList[*taskCount].description);
 
-void CreateTask(struct Task task){
-    int size;
-    int i;
+    printf("Enter task deadline: ");
+    scanf(" %[^\n]", taskList[*taskCount].deadline);
 
-    for (i = 0; i <= *size; i++){
-        printf("Description: \n");
-        scanf("%s",&task.description);
-        printf("Due Date: dd-mm-year \n");
-        scanf("%s",&task.year, &task.month, &task.day);
-        printf("Priority: \n");
-        scanf("%s",&task.description);
-    }
+    printf("Enter task priority (1-5): ");
+    scanf("%d", &taskList[*taskCount].priority);
+
+    (*taskCount)++;
+    printf("Task added successfully!\n");
 }
-void DisplayTask(struct Task task) {
-    int size;
-    int i;
-    printf("\nTask Details:\n");
-    for(i = 0;i<= *size;i++){
-    printf("Description: %s\n", task.description);
-    printf("Due Date: %02d-%02d-%04d\n", task.day, task.month, task.year);
-    printf("Priority: %d\n", task.priority);
+
+// Function to display the list of tasks
+void displayTasks(struct Task *taskList, int taskCount) {
+    if (taskCount == 0) {
+        printf("No tasks available.\n");
+        return;
     }
-    
+
+    printf("\nTask List:\n");
+    printf("--------------------------------------------------------\n");
+    printf("| %-20s | %-15s | %-8s |\n", "Description", "Deadline", "Priority");
+    printf("--------------------------------------------------------\n");
+
+    for (int i = 0; i < taskCount; i++) {
+        printf("| %-20s | %-15s | %-8d |\n", taskList[i].description, taskList[i].deadline, taskList[i].priority);
+    }
+
+    printf("--------------------------------------------------------\n");
+}
+
+int main() {
+    struct Task taskList[100];  // Assuming a maximum of 100 tasks
+    int taskCount = 0;
+    int choice;
+
+    do {
+        printf("\nTask Management System\n");
+        printf("1. Add a Task\n");
+        printf("2. Display Tasks\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addTask(taskList, &taskCount);
+                break;
+            case 2:
+                displayTasks(taskList, taskCount);
+                break;
+            case 3:
+                printf("Exiting the program. Goodbye!\n");
+                break;
+            default:
+                printf("Invalid choice. Please enter a valid option.\n");
+        }
+
+    } while (choice != 3);
+
+    return 0;
 }
