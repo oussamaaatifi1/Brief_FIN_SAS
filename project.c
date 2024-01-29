@@ -1,75 +1,105 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-// Structure to represent a task
-struct Task {
-    char description[100];
-    char deadline[20];
-    int priority;
+struct Tache {
+    char description[10];
+    char deadline[10];
+    int priorite;
 };
 
-// Function to add a new task to the list
-void addTask(struct Task *taskList, int *taskCount) {
-    printf("Enter task description: ");
-    scanf(" %[^\n]", taskList[*taskCount].description);
+void ajoutetache(struct Tache *tache,int *tachcount ){
+    printf("entrez new description est:\n");
+    scanf("%[^\n]",tache[*tachcount].description);
 
-    printf("Enter task deadline: ");
-    scanf(" %[^\n]", taskList[*taskCount].deadline);
+    printf("entrez new deadline est:\n");
+    scanf("%[^\n]",tache[*tachcount].deadline);
 
-    printf("Enter task priority (1-5): ");
-    scanf("%d", &taskList[*taskCount].priority);
+    printf("entrez new priority (1-5) est:\n");
+    scanf("%d",&tache[*tachcount].priorite);
 
-    (*taskCount)++;
-    printf("Task added successfully!\n");
+    (*tachcount)++;
+    printf("le tache a ajouter avec succes\n");
 }
 
-// Function to display the list of tasks
-void displayTasks(struct Task *taskList, int taskCount) {
-    if (taskCount == 0) {
-        printf("No tasks available.\n");
-        return;
+void AfficheList(struct Tache *tache,int tachcount){
+    int i;
+    printf("\ntache list est : ");
+    printf("---------------------------------------------------------------\n");
+    printf("| %-20s | %-15s | %-9s |\n","description", "deadline", "priorite" );
+    printf("---------------------------------------------------------------\n");
+    for (i = 0 ; i < tachcount ; i++){
+        printf("| %-20s | %-15s | %-9d |\n" ,tache[i].description,tache[i].deadline,tache[i].priorite);
     }
-
-    printf("\nTask List:\n");
-    printf("--------------------------------------------------------\n");
-    printf("| %-20s | %-15s | %-8s |\n", "Description", "Deadline", "Priority");
-    printf("--------------------------------------------------------\n");
-
-    for (int i = 0; i < taskCount; i++) {
-        printf("| %-20s | %-15s | %-8d |\n", taskList[i].description, taskList[i].deadline, taskList[i].priority);
-    }
-
-    printf("--------------------------------------------------------\n");
+    printf("---------------------------------------------------------------\n");
 }
 
-int main() {
-    struct Task taskList[100];  // Assuming a maximum of 100 tasks
-    int taskCount = 0;
+void ModifierList(struct Tache *tache,int tachcount){
+    int tacheIndex;
+    printf("veuillez entre le nombre de tache pour modifier est (1-%d) :",tachcount);
+    scanf("%d",&tacheIndex);
+
+    tacheIndex--;
+    printf("entrez new description est:");
+    scanf("%[^\n]",tache[tachcount].description);
+    printf("entrez new deadline est:");
+    scanf("%[^\n]",tache[tachcount].deadline);
+    printf("entrez new priority (1-5) est:");
+    scanf("%d",&tache[tachcount].priorite);
+
+    printf("Tache modifie avec succes!\n");
+}
+void SupprimerTach(struct Tache tache[], int *tacheCount) {
+    int tacheIndex;
+
+    printf("Enter tache number to delete: ");
+    scanf("%d", &tacheIndex);
+    getchar(); // consume newline character
+
+    for (int i = tacheIndex - 1; i < *tacheCount - 1; i++) {
+        tache[i] = tache[i + 1];
+    }
+
+    (*tacheCount)--;
+
+    printf("tache deleted successfully!\n");
+}
+
+int main () {
+    struct Tache tache[5];
+    int tachcount = 0;
     int choice;
+    
 
     do {
-        printf("\nTask Management System\n");
-        printf("1. Add a Task\n");
-        printf("2. Display Tasks\n");
-        printf("3. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                addTask(taskList, &taskCount);
-                break;
-            case 2:
-                displayTasks(taskList, taskCount);
-                break;
-            case 3:
-                printf("Exiting the program. Goodbye!\n");
-                break;
-            default:
-                printf("Invalid choice. Please enter a valid option.\n");
+        printf("\n veuillez chose : \n");
+        printf("1- ajouter taches\n");
+        printf("2- afficher Listes\n");
+        printf("3- Modifier taches\n");
+        printf("3- Supprimer taches\n");
+        printf("4- Sortie\n");
+        printf("\nveuillez entrez le choice :");
+    scanf("%d",&choice);
+        switch (choice)
+        {
+        case 1:
+            ajoutetache(tache,&tachcount);
+            break;
+        case 2:
+            AfficheList(tache,tachcount);
+            break;
+        case 3:
+            AfficheList(tache,tachcount);
+            break;
+        case 4:
+            SupprimerTach(tache,&tachcount);
+            break;
+        case 5:
+            printf("exite le programme\n");
+            break;
+        default:
+        printf("error\n");
+            break;
         }
+    }while (choice != 5);
 
-    } while (choice != 3);
-
-    return 0;
 }
