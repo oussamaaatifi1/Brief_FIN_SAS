@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Structure to represent a date
+// Structure pour représenter une date
 struct Date {
     int jour;
     int mois;
@@ -12,10 +12,10 @@ struct Date {
 struct Tache {
     char description[100];
     struct Date deadline;
-    int priority;
+    int priorite;
 };
 
-// Function to add a new tache
+// Fonction pour ajouter une nouvelle tache
 void AjouteTache(struct Tache tache[], int *tacheCount) {
     printf("Enter tache description: ");
     scanf(" %[^\n]", tache[*tacheCount].description);
@@ -27,14 +27,14 @@ void AjouteTache(struct Tache tache[], int *tacheCount) {
     printf("Enter tache deadline (annee): ");
     scanf("%d", &tache[*tacheCount].deadline.annee);
 
-    printf("Enter tache priority (1-5): ");
-    scanf("%d", &tache[*tacheCount].priority);
+    printf("Enter tache priorite (1-5): ");
+    scanf("%d", &tache[*tacheCount].priorite);
 
     (*tacheCount)++;
-    printf("Tache added successfully!\n");
+    printf("Tache ajouter avec succes!\n");
 }
 
-// Function to display the list of tache
+// Fonction pour afficher la liste des taches
 void AffTache(struct Tache tache[], int tacheCount) {
     if (tacheCount == 0) {
         printf("No tache available.\n");
@@ -44,15 +44,15 @@ void AffTache(struct Tache tache[], int tacheCount) {
             printf("Tache %d:\n", i + 1);
             printf("Description: %s\n", tache[i].description);
             printf("Deadline: %02d/%02d/%04d\n", tache[i].deadline.jour, tache[i].deadline.mois, tache[i].deadline.annee);
-            printf("Priority: %d\n\n", tache[i].priority);
+            printf("priorite: %d\n\n", tache[i].priorite);
         }
     }
 }
 
-// Function to modify a tache
+// Fonction pour modifier une tache
 void ModiTache(struct Tache tache[], int tacheCount) {
     
-        printf("Enter the tache number to modify (1-%d): ", tacheCount);
+        printf("Entrez le numero de tache a modifier (1-%d): ", tacheCount);
         int tacheNumber;
         scanf("%d", &tacheNumber);
 
@@ -67,17 +67,17 @@ void ModiTache(struct Tache tache[], int tacheCount) {
             printf("Enter new tache deadline (annee): ");
             scanf("%d", &tache[tacheNumber - 1].deadline.annee);
 
-            printf("Enter new tache priority (1-5): ");
-            scanf("%d", &tache[tacheNumber - 1].priority);
+            printf("Enter new tache priorite (1-5): ");
+            scanf("%d", &tache[tacheNumber - 1].priorite);
 
-            printf("Tache modified successfully!\n");
+            printf("Tache modifie avec succes!\n");
 }
 
 
-// Function to delete a tache
+// Fonction pour supprimer une tache
 void SuppTache(struct Tache tache[], int *tacheCount) {
     
-        printf("Enter the tache number to delete (1-%d): ", *tacheCount);
+        printf("Entrez le numero de tache a supprimer (1-%d): ", *tacheCount);
         int tacheNumber;
         scanf("%d", &tacheNumber);
 
@@ -87,15 +87,15 @@ void SuppTache(struct Tache tache[], int *tacheCount) {
             }
 
             (*tacheCount)--;
-            printf("tache deleted successfully!\n");
+            printf("tache supprimer avec succes!\n");
 }        
-// Function To Swap taches 
+// Fonction pour échanger des taches 
 void Echange(struct Tache *a, struct Tache *b) {
     struct Tache temp = *a;
     *a = *b;
     *b = temp;
 }
-
+// Fonction pour trier les taches par date dans l'ordre Croissant
 void OrdCroissant(struct Tache tache[], int tacheCount) {
     for (int i = 0; i < tacheCount - 1; i++) {
         for (int j = 0; j < tacheCount - i - 1; j++) {
@@ -111,7 +111,7 @@ void OrdCroissant(struct Tache tache[], int tacheCount) {
     }
 }
 
-// Function to sort taches by date in descending order
+// Fonction pour trier les taches par date dans l'ordre décroissant
 void OrdDeroissant(struct Tache tache[], int tacheCount) {
     for (int i = 0; i < tacheCount - 1; i++) {
         for (int j = 0; j < tacheCount - i - 1; j++) {
@@ -128,38 +128,38 @@ void OrdDeroissant(struct Tache tache[], int tacheCount) {
 }
 void FiltrerParPriorite(struct Tache tache[], int tacheCount) {
     int i;
-    int priority;
+    int priorite;
 
     if (tacheCount > 0) {
         printf("Entrez la priorite (0: Faible, 1: Normale, 2: Importante, 3: TresImportante) : ");
-        scanf("%d", &priority);
+        scanf("%d", &priorite);
 
-        printf("taches with priority %d:\n", priority);
+        printf("des taches avec priorite %d:\n", priorite);
 
         for (i = 0; i < tacheCount; ++i) {
-            if (tache[i].priority == priority) {
+            if (tache[i].priorite == priorite) {
                 printf("tache %d:\n", i + 1);
                 printf("Description: %s\n", tache[i].description);
                 printf("Date: %02d/%02d/%04d\n", tache[i].deadline.jour, tache[i].deadline.mois, tache[i].deadline.annee);
 
-                switch (tache[i].priority) {
+                switch (tache[i].priorite) {
                     case 1:
-                        printf("Priority: Faible\n");
+                        printf("priorite: Faible\n");
                         break;
                     case 2:
-                        printf("Priority: Normale\n");
+                        printf("priorite: Normale\n");
                         break;
                     case 3:
-                        printf("Priority: Importante\n");
+                        printf("priorite: Importante\n");
                         break;
                     case 4:
-                        printf("Priority: Tres Importante\n");
+                        printf("priorite: Tres Importante\n");
                         break;
                     case 5:
-                        printf("Priority: Tres Importante\n");
+                        printf("priorite: Tres Importante\n");
                         break;
                     default:
-                        printf("Unknown Priority\n");
+                        printf("Unknown priorite\n");
                 }
 
                 printf("\n");
@@ -171,9 +171,9 @@ void FiltrerParPriorite(struct Tache tache[], int tacheCount) {
 }
 
 int main() {
-    struct Tache tache[100];  // Assuming a maximum of 100 tache
+    struct Tache tache[10];  // Assuming a maximum of 100 tache
     int tacheCount = 0;
-    int choice;
+    int choix;
 
     do {
         printf("\nTache Manager Menu:\n");
@@ -185,10 +185,10 @@ int main() {
         printf("6. Taches triees par date (croissant)\n");
         printf("7. Filtrer par priorite\n");
         printf("8. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        printf("Enter your choix: ");
+        scanf("%d", &choix);
 
-        switch (choice) {
+        switch (choix) {
             case 1:
                 AjouteTache(tache, &tacheCount);
                 break;
@@ -214,9 +214,9 @@ int main() {
                 printf("Fermeture du programme. Au revoir !\n");
                 break;
             default:
-                printf("Invalid choice. Please enter a valid option.\n");
+                printf("Invalid choix. Please enter a valid option.\n");
         }
-    } while (choice != 8);
+    } while (choix != 8);
 
     return 0;
 }
