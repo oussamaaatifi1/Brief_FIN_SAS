@@ -16,31 +16,24 @@ struct Tache {
 };
 
 // Fonction pour ajouter une nouvelle tache
-void AjouteTache(struct Tache tache[], int *tacheCount) {
-    printf("Enter tache description: ");
-    scanf(" %[^\n]", tache[*tacheCount].description);
+void AjouteTache(struct Tache tache[], int *taskCount) {
+    printf("Enter task description: ");
+    scanf(" %[^\n]", tache[*taskCount].description);
 
-    // Loop to ensure a valid date is entered
-    do {
-        printf("Enter tache deadline (jour): ");
-        scanf("%d", &tache[*tacheCount].deadline.jour);
-        printf("Enter tache deadline (mois): ");
-        scanf("%d", &tache[*tacheCount].deadline.mois);
-        printf("Enter tache deadline (annee): ");
-        scanf("%d", &tache[*tacheCount].deadline.annee);
+    printf("Enter task deadline (jour): ");
+    scanf("%d", &tache[*taskCount].deadline.jour);
+    printf("Enter task deadline (mois): ");
+    scanf("%d", &tache[*taskCount].deadline.mois);
+    printf("Enter task deadline (annee): ");
+    scanf("%d", &tache[*taskCount].deadline.annee);
 
-        // Check if the entered year is less than 2024
-        if (tache[*tacheCount].deadline.annee < 2024) {
-            printf("Invalid date. Please enter a date after 2023.\n");
-        }
-    } while (tache[*tacheCount].deadline.annee < 2024);
+    printf("Enter task priority (1-5): ");
+    scanf("%d", &tache[*taskCount].priority);
 
-    printf("Enter tache priorite (1-5): ");
-    scanf("%d", &tache[*tacheCount].priorite);
-
-    (*tacheCount)++;
-    printf("Tache ajouter avec succes!\n");
+    (*taskCount)++;
+    printf("Tache added successfully!\n");
 }
+
 
 
 // Fonction pour afficher la liste des taches
